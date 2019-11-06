@@ -1,4 +1,4 @@
-import {getSnapshot} from './snapshot';
+import { getSnapshot, Config, PageItem } from './snapshot';
 
 const chalk = require('chalk');
 const Koa = require('koa');
@@ -10,4 +10,7 @@ app.use(require("koa-static")(__dirname + "./../dist"));
 app.listen(3000);
 log(chalk.green('server start at localhost:3000'));
 
-getSnapshot().then(() => console.log(chalk.green('finish!')));
+const baidu: PageItem = {
+    url: 'http://www.baidu.com'
+}
+getSnapshot({pageItems: [baidu]}).then(() => console.log(chalk.green('finish!')));
