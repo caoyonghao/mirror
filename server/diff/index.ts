@@ -1,6 +1,6 @@
 const looksSame = require('looks-same');
-const chalk = require('chalk');
-const log = console.log;
+// const chalk = require('chalk');
+// const log = console.log;
 
 export interface Config {
     src: string,
@@ -9,10 +9,11 @@ export interface Config {
 
 const diff = (cfg: Config) => {
     const { src, target } = cfg;
-
-    looksSame(src, target, (error, { equal }) => {
-        log(chalk.green(error, equal));
-    });
+    return new Promise((resolve) => {
+        looksSame(src, target, (error, res) => {
+            resolve({ error, res});
+        });
+    })
 }
 
 export {

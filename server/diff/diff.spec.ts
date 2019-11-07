@@ -1,11 +1,14 @@
 import test from 'ava';
+import { diff } from './index';
 
-// import { diff } from './index';
-// const { diff } = require('./index').default;
+const path = require('path');
+
 test('compare image', t => {
-    // diff({
-    //     src: './../../tmp/snapshot/1.png',
-    //     target: './../../tmp/snapshot/2.png',
-    // });
-    t.pass();
+    return new Promise(resolve => diff({
+        src: path.resolve(process.cwd(), './tmp/snapshot/1.png'),
+        target: path.resolve(process.cwd(), './tmp/snapshot/2.png'),
+    }).then((data: any) => {
+        t.is(data.res.equal, true)
+        resolve();
+    }));
 });
